@@ -9,17 +9,20 @@ const {
 
 const router = Router();
 
+/** Todas las rutas deben ser validadas del JWT */
+router.use(validarJWT);
+
 /** Todas tienen que pasar la validacion del JWT */
 /** Obtener Eventos */
-router.get("/", [validarJWT], getEventos);
+router.get("/", getEventos);
 
 /** Crear Evento */
-router.post("/", [validarJWT], crearEvento);
+router.post("/", crearEvento);
 
 /** Actualizar Evento */
-router.put("/:id", [validarJWT], actualizarEvento);
+router.put("/:id", actualizarEvento);
 
 /** Eliminar Evento */
-router.delete("/:id", [validarJWT], eliminarEvento);
+router.delete("/:id", eliminarEvento);
 
 module.exports = router;
