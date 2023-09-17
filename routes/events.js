@@ -34,7 +34,17 @@ router.post(
 );
 
 /** Actualizar Evento */
-router.put("/:id", actualizarEvento);
+router.put(
+  "/:id",
+  [
+    /** Middlewares */
+    check("title", "Titulo es obligatorio").not().isEmpty(),
+    check("start", "Fecha de inicio es obligatoria").custom(isDate),
+    check("end", "Fecha de finalizacion es obligatoria").custom(isDate),
+    validarCampos,
+  ],
+  actualizarEvento
+);
 
 /** Eliminar Evento */
 router.delete("/:id", eliminarEvento);
